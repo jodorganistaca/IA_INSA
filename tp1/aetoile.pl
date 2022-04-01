@@ -168,14 +168,15 @@ loop_successors([[S, [F, H, G], Pere, Action]|Tail], Pf, Pfn, Pu, Pun, Q) :-
 compare_values(Val, Val1) :- 
 	Val @< Val1.
 
-affiche_solution([U,[F,H,G],Pere, A], Qs) :-
+affiche_solution([U,[F,H,G],Pere, A1], Qs) :-
 	belongs([Pere,V,P,A], Qs), 
-	affiche_actions([Pere,V,P,A], Qs),
-	write_state(Pere),
-	writeln("Action:"),
-	writeln(A).
+	affiche_solution([Pere,V,P,A], Qs),
+	/*nl,writeln("State:"),
+	write_state(Pere),*/
+	nl,writeln("Action:"),
+	writeln(A1).
 	
-affiche_solution([U,[F,H,G],nil, nil]) :- writeln("solution trouve: ").
+affiche_solution([U,[F,H,G],nil, nil], Qs) :- writeln("solution trouve: ").
 
 aetoile(nil, nil, Q) :- writeln(' PAS de SOLUTION : L’ETAT FINAL N’EST PAS ATTEIGNABLE !').
 
@@ -184,6 +185,7 @@ aetoile(Pf, Pu, Q) :-
 	suppress([Fin, Val, Pere, Action], Pu, _), 
 	final_state(Fin),
 	writeln("Fin state trouve: "),
+	put_flat(Q),
 	!,
 	affiche_solution([Fin, Val, Pere, Action], Q).
 
@@ -195,14 +197,6 @@ aetoile(Pf, Pu, Q) :-
 	write_state(L),
 	loop_successors(L, Pf1, Pfn, Pu1, Pun, Q),
 	insert([U, Val, Parent, Move], Q, Qn),
-	nl,writeln("insertion of State en Q"),
-	nl,writeln("Pfn"),
-	put_flat(Pfn),
-	nl,writeln("Pun"),
-	put_flat(Pun),
-	nl,writeln("Qnnnnnnnnnnnnnnnn"),
-	put_flat(Qn),
-	nl,writeln("Qnnnnnnnnnnnnnnnn"),
 	aetoile(Pfn, Pun, Qn).
 	
 test :- 
@@ -314,7 +308,6 @@ test4 :-
 	writeln("List Succeseurs"),
 	write_state(L),
 	loop_successors(L, Pf2, Pf3, Pu2, Pu3, Q),
-	writeln("AAAAAAAAAAAA"),
 	put_flat(Pf3),
 	insert([U, Val, Parent, Move], Q, Q1),
 	suppress_min([Val1, U1], Pf3, Pf4),	

@@ -71,9 +71,9 @@ initial_state([ [a, b, c],
              [h,f, d],
              [g, e,  vide]]).*/
              
-initial_state([ [ a, b, c],        
-                [ g, h, d],
-                [vide,f, e] ]). % h2=2, f*=2
+initial_state([ [b, h, c],       % C'EST L'EXEMPLE PRIS EN COURS
+                [a, f, d],       % 
+                [g,vide,e] ]).
 %******************
 % ETAT FINAL DU JEU
 %******************
