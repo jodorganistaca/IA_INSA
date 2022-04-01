@@ -1,0 +1,9 @@
+1.2 situation_initiale(S), joueur_initial(J).
+	S est la situation initiale une grille 3x3 empty
+	J c'est le joueur initial soit x soit o qui commence le partie.
+	
+	situation_initiale(S), nth1(3,S,Lig), nth1(2,Lig,o)
+	C'est le premier tour. En le coordonné (3,2) de la grille se trouve une o
+	
+3.2 successeurs(x,Etat,Succ).
+3.3 situation_initiale(Etat), successeurs(x,Etat,Succ).

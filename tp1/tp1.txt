@@ -1,0 +1,20 @@
+1.2 
+    a final_state(  [[1, 2,  3, 4],
+                    [5, 6, 7, 8],
+                    [9, 10, 11, 12],
+                    [13, 14, 15, vide]]).
+    b.  initial_state(Ini), nth1(L,Ini,Ligne), nth1(C,Ligne, d).
+    initial_state(Ini): Laise le variable Ini comme la Situation initiale (une matrix 3x3),
+    nth1(L,Ini,Ligne): l'indice (L) de tous les Lignes (Ligne) dans l'etat initial (Ini),
+    nth1(C,Ligne, d): l'indice (C) de l'element (d) dans le (Ligne),
+    Donc, il donnerait les coordonnes L,C de le element d dans le initial state Ini.
+        final_state(Fin), nth1(3,Fin,Ligne), nth1(2,Ligne,P)
+	final_state(Fin): Laise le variable Fin comme la Situation final (une matrix 3x3),
+	nth1(3,Fin,Ligne): l'indice (3) de tous les Lignes (Ligne) dans l'etat final (Fin),
+	nth1(2,Ligne,P):  l'indice (2) de l'element (P) dans le (Ligne),
+ 	Donc, il donnerait le element P dans les coordonnes 3,2 de l'etat final Fin.
+    c. final_state(Fin), nth1(1, Fin, L), nth1(1, L, a).
+    d. initial_state(Ini), rule(R, 1, Ini, S2).
+    e. initial_state(Ini), findall(S2,rule(R, 1, Ini, S2),L).
+    d. initial_state(Ini), findall([A,S], rule(A, 1, Ini, S),L).
+
