@@ -27,7 +27,7 @@
 	il n'y a donc pas de coup possible a jouer (Coup = rien)
 	et l'evaluation de Etat est faite par l'heuristique.*/
 
-negamax(J, Etat, Pmax, Pmax, [Nil, Val]) :- heuristique(J,Etat,H), writeln(H).
+negamax(J, Etat, Pmax, Pmax, [nil, Val]) :- heuristique(J,Etat,Val), writeln(Val).
 
 	/*2/ la profondeur maximale n'est pas  atteinte mais J ne
 	peut pas jouer ; au TicTacToe un joueur ne peut pas jouer
@@ -35,7 +35,7 @@ negamax(J, Etat, Pmax, Pmax, [Nil, Val]) :- heuristique(J,Etat,H), writeln(H).
 	il n'y a pas de coup a jouer (Coup = rien)
 	et l'evaluation de Etat est faite par l'heuristique.*/
 	
-negamax(J, Etat, P, Pmax, [Nil, Val]) :- P < Pmax, heuristique(J,Etat,H), writeln(H).
+negamax(J, Etat, P, Pmax, [nil, Val]) :- P < Pmax, heuristique(J,Etat,Val), writeln(Val).
 
 	/*3/ la profondeur maxi n'est pas atteinte et J peut encore
 	jouer. Il faut evaluer le sous-arbre complet issu de Etat ; */
@@ -123,15 +123,22 @@ A FAIRE : commenter chaque litteral de la 2eme clause de loop_negamax/5,
 A FAIRE : ECRIRE ici les clauses de meilleur/2
 	*/
 
-
+meilleur([],_).
+meilleur([X],X).
+meilleur([X|Y],BestCouple):-
+	X = [_,Val],
+	BestCouple = [_,Min],
+	(Val<Min -> BestCouple2=X;BestCouple2=BestCouple),
+	meilleur(Y,BestCouple2).
 
 	/******************
   	PROGRAMME PRINCIPAL
   	*******************/
 
 main(B,V, Pmax) :-
-
-	true.        
+	situation_initiale(S),
+	joueur_initial(J),
+	negamax(J, S, 0, Pmax, [B, V]).       
 
 
 	/*

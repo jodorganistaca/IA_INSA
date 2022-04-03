@@ -208,7 +208,7 @@ partie2([ [x,_,_],
           [o,_,_],
           [x,_,_] ]).
 	
-testA :- M = [[a,b,c], [d,e,f], [g,h,i]], alignement(Ali, M).
+testA :- M = [[a,b,c], [d,e,f], [g,h,i]], alignement(Ali, M), writeln(Ali).
 test1 :- partie1(M), alignement(Ali, M), alignement_gagnant(Ali, x).
 test2 :- partie1(M), alignement(Ali, M), alignement_gagnant(Ali, o).
 test3 :- partie1(M), alignement(Ali, M), alignement_perdant(Ali, o).
