@@ -27,7 +27,8 @@
 	il n'y a donc pas de coup possible a jouer (Coup = rien)
 	et l'evaluation de Etat est faite par l'heuristique.*/
 
-negamax(J, Etat, Pmax, Pmax, [nil, Val]) :- heuristique(J,Etat,Val), writeln(Val).
+negamax(J, Etat, Pmax, Pmax, [nil, Val]) :- 
+	heuristique(J,Etat,Val).
 
 	/*2/ la profondeur maximale n'est pas  atteinte mais J ne
 	peut pas jouer ; au TicTacToe un joueur ne peut pas jouer
@@ -35,7 +36,11 @@ negamax(J, Etat, Pmax, Pmax, [nil, Val]) :- heuristique(J,Etat,Val), writeln(Val
 	il n'y a pas de coup a jouer (Coup = rien)
 	et l'evaluation de Etat est faite par l'heuristique.*/
 	
-negamax(J, Etat, P, Pmax, [nil, Val]) :- P < Pmax, heuristique(J,Etat,Val), writeln(Val).
+negamax(J, Etat, P, Pmax, [nil, Val]) :- 
+	P < Pmax,
+	successeurs(J,Etat,Succ),
+	length(Succ, 0),
+	heuristique(J,Etat,Val).
 
 	/*3/ la profondeur maxi n'est pas atteinte et J peut encore
 	jouer. Il faut evaluer le sous-arbre complet issu de Etat ; */
@@ -59,8 +64,12 @@ negamax(J, Etat, P, Pmax, [nil, Val]) :- P < Pmax, heuristique(J,Etat,Val), writ
 	*/
 	
 negamax(J, Etat, P, Pmax, [Coup, Val]) :-
-	ListS is successeurs(J,Etat,Succ),
-	loop_negamax(J,P,Pmax,ListS).
+	P < Pmax,
+	successeurs(J,Etat,Succ),
+	\+length(Succ, 0),
+	loop_negamax(J,P,Pmax,Succ,ListC),
+	meilleur(ListC,[Coup, Val1]),
+	Val is (-Val1).
 	
 	/*******************************************
 	 DEVELOPPEMENT D'UNE SITUATION NON TERMINALE
@@ -123,13 +132,17 @@ A FAIRE : commenter chaque litteral de la 2eme clause de loop_negamax/5,
 A FAIRE : ECRIRE ici les clauses de meilleur/2
 	*/
 
-meilleur([],_).
+
 meilleur([X],X).
-meilleur([X|Y],BestCouple):-
-	X = [_,Val],
-	BestCouple = [_,Min],
-	(Val<Min -> BestCouple2=X;BestCouple2=BestCouple),
-	meilleur(Y,BestCouple2).
+
+meilleur([[Coup, Val]|Tail],[Coup, Val]):-
+	meilleur(Tail,[_, Val1]),
+	Val =< Val1.
+	
+meilleur([[_, Val]|Tail],[Coup1, Val1]):-
+	meilleur(Tail,[Coup1, Val1]),
+	Val > Val1.
+
 
 	/******************
   	PROGRAMME PRINCIPAL
@@ -147,4 +160,14 @@ A FAIRE :
 	Pmax = 1, 2, 3, 4 ...
 	Commentez les résultats obtenus.
 	*/
-
+testNegamax1 :- main(B, V, 1), writeln([B, V]).
+testNegamax2 :- main(B, V, 2), writeln([B, V]).
+testNegamax3 :- main(B, V, 3), writeln([B, V]).
+testNegamax4 :- main(B, V, 4), writeln([B, V]).
+testNegamax5 :- main(B, V, 5), writeln([B, V]).
+testNegamax6 :- main(B, V, 6), writeln([B, V]).
+testNegamax7 :- main(B, V, 7), writeln([B, V]).
+testNegamax8 :- main(B, V, 8), writeln([B, V]).
+testNegamax9 :- main(B, V, 9), writeln([B, V]).
+testSucc1 :- situation_initiale(S), joueur_initial(J), successeurs(J,S,Succ), writeln(Succ).
+testSucc2 :- partie2(S), joueur_initial(J), successeurs(J,S,Succ), writeln(Succ).
