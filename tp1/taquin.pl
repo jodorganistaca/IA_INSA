@@ -33,13 +33,13 @@ Les autres prédicats sont spécifiques au Taquin.
 % format :  initial_state(+State) ou State est une matrice (liste de listes)
    
 
-/*initial_state([ [b, h, c],       % C'EST L'EXEMPLE PRIS EN COURS
+initial_state([ [b, h, c],       % C'EST L'EXEMPLE PRIS EN COURS
                 [a, f, d],       % 
                 [g,vide,e] ]).   % h1=4,   h2=5,   f*=5
 
 
 
-% AUTRES EXEMPLES POUR LES TESTS DE  A*
+/*% AUTRES EXEMPLES POUR LES TESTS DE  A*
 
 
 initial_state([ [ a, b, c],        
@@ -70,10 +70,7 @@ initial_state([ [a, b, c],
 /*initial_state([[a, b,  c],
              [h,f, d],
              [g, e,  vide]]).*/
-             
-initial_state([ [e, f, g],
-                [d,vide,h],
-                [c, b, a]  ]).
+
 %******************
 % ETAT FINAL DU JEU
 %******************
